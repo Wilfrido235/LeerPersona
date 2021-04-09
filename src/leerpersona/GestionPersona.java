@@ -10,12 +10,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
+import java.io.IOException;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -35,8 +38,10 @@ public class GestionPersona extends javax.swing.JFrame {
      private static String NOMBRE, USERNAME, PASWORD;
      private static int Id;
     
-    private void LeerPersona() {
-        try {
+// 
+     private void insertarPersona(){
+         
+         try {
              File archivo=new File("C:\\Users\\JIMENEZ\\Pictures\\Proyecto xml leer\\datos.xml");
        DocumentBuilderFactory dbf= DocumentBuilderFactory.newInstance();
        DocumentBuilder db=dbf.newDocumentBuilder();
@@ -70,8 +75,7 @@ public class GestionPersona extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(rootPane, "El ID introducido no es un número");
                e.printStackTrace();
        }
-    }
-     private void insertarPersona() {
+         
 //        try {
 //            boolean insertado = this.controlador.insertarPersona(NOMBRE,USERNAME,PASWORD,ID);
 //            if (insertado == true) {
