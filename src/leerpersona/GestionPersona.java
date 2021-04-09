@@ -6,8 +6,6 @@
 package leerpersona;
 
 import java.awt.HeadlessException;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -33,7 +31,7 @@ public class GestionPersona extends javax.swing.JFrame {
 //        seleccionarPersona();
     }
 
-    private void insertarPersona() {
+    private void LeerPersona() {
         try {
              File archivo=new File("C:\\Users\\JIMENEZ\\Pictures\\Proyecto xml leer\\datos.xml");
        DocumentBuilderFactory dbf= DocumentBuilderFactory.newInstance();
@@ -49,24 +47,40 @@ public class GestionPersona extends javax.swing.JFrame {
            System.out.println("Docente:"+nodo.getNodeName()+i);
            if(nodo.getNodeType()==Node.ELEMENT_NODE){
                Element element =(Element)nodo;
-               System.out.println("ID:"+ element.getAttribute("id"));
-               System.out.println("ID:"+ element.getElementsByTagName("nombre").item(0).getTextContent());
-               System.out.println("ID:"+ element.getElementsByTagName("username").item(0).getTextContent());
-               System.out.println("ID:"+ element.getElementsByTagName("password").item(0).getTextContent());
-             
+               element.getAttribute("id");
+               element.getElementsByTagName("nombre").item(0).getTextContent();
+               element.getElementsByTagName("username").item(0).getTextContent();
+               element.getElementsByTagName("password").item(0).getTextContent();
+               
+                boolean insertado = this.controlador.insertarPersona(Id,NOMBRE,USERNAME,PASWORD);
+            if (insertado == true) {
+                JOptionPane.showMessageDialog(rootPane, "Datos guardados");
+                tabla.setModel(this.controlador.personas());
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Algo falló al insertar");
+            }
+
            }   
        }
-       
-       
-       }catch(Exception e){
-               
+       }catch(NumberFormatException | HeadlessException e){
+               JOptionPane.showMessageDialog(rootPane, "El ID introducido no es un número");
                e.printStackTrace();
                
                }
-        
-     
     }
-    
+     private void insertarPersona() {
+//        try {
+//            boolean insertado = this.controlador.insertarPersona(NOMBRE,USERNAME,PASWORD,ID);
+//            if (insertado == true) {
+//                JOptionPane.showMessageDialog(rootPane, "Datos guardados");
+//                tabla.setModel(this.controlador.personas());
+//            } else {
+//                JOptionPane.showMessageDialog(rootPane, "Algo falló al insertar");
+//            }
+//        } catch (NumberFormatException | HeadlessException e) {
+//            JOptionPane.showMessageDialog(rootPane, "El ID introducido no es un número");
+//        }
+    }
 //    public void seleccionarPersona() {
 //        tabla.addMouseListener(new MouseAdapter() {
 //            @Override

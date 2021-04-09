@@ -3,17 +3,17 @@ package leerpersona;
 public class Persona {
 
     private String NOMBRE, USERNAME, PASWORD;
-    private int ID;
+    private int Id;
 
-    public Persona(String NOMBRE, String USERNAME, String PASWORD, int ID) {
+    public Persona(String NOMBRE, String USERNAME, String PASWORD, int Id) {
         this.NOMBRE = NOMBRE;
         this.USERNAME = USERNAME;
         this.PASWORD = PASWORD;
-        this.ID = ID;
+        this.Id = Id;
     }
 
-    Persona(int ID, String NOMBRE, String USERNAME, String PASWORD) {
-       
+    Persona(int Id, String NOMBRE, String USERNAME, String PASWORD) {
+        
     }
 
     public String getNOMBRE() {
@@ -40,17 +40,18 @@ public class Persona {
         this.PASWORD = PASWORD;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return Id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     @Override
     public String toString() {
-        return "Persona{" + "NOMBRE=" + NOMBRE + ", USERNAME=" + USERNAME + ", PASWORD=" + PASWORD + ", ID=" + ID + '}';
+        return "Persona{" + "NOMBRE=" + NOMBRE + ", USERNAME=" + USERNAME + ", PASWORD=" + PASWORD + ", Id=" + Id + '}';
     }
 
+   
 }

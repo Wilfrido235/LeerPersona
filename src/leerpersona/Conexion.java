@@ -41,7 +41,7 @@ public class Conexion {
         try {
             //BUSCAMOS SI EXISTE EL OBJETO, SI ES ASÍ LO ACTUALIZAMOS EN LA BASE DE DATOS
             this.open();
-            ObjectSet resultados = this.oc.get(new Persona(null, null, null, objeto.getID()));
+            ObjectSet resultados = this.oc.get(new Persona(null, null, null, objeto.getId()));
             if (resultados.size() > 0) {                
                 Persona resultado = (Persona) resultados.next();
                 resultado.setNOMBRE(objeto.getNOMBRE());
