@@ -6,20 +6,14 @@
 package leerpersona;
 
 import java.awt.HeadlessException;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
-import java.io.IOException;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-
 /**
  *
  * @author JIMENEZ
@@ -35,91 +29,47 @@ public class GestionPersona extends javax.swing.JFrame {
         tabla.setModel(this.controlador.personas());
 //        seleccionarPersona();
     }
-     private static String NOMBRE, USERNAME, PASWORD;
-     private static int Id;
-    
+    private static String NOMBRE, USERNAME, PASWORD;
+    private static int Id;
+
 // 
-     private void insertarPersona(){
-         
-         try {
-             File archivo=new File("C:\\Users\\JIMENEZ\\Pictures\\Proyecto xml leer\\datos.xml");
-       DocumentBuilderFactory dbf= DocumentBuilderFactory.newInstance();
-       DocumentBuilder db=dbf.newDocumentBuilder();
-       Document d=db.parse(archivo);
-       d.getDocumentElement().normalize();
-       System.out.println("Elemeto principal"+d.getDocumentElement().getNodeName());
-       
-       NodeList listDocentes = d.getElementsByTagName("docente");   
-       
-       for(int i=0;i<listDocentes.getLength();i++){
-           Node nodo=listDocentes.item(i);
-           System.out.println("Docente:"+nodo.getNodeName()+i);
-           if(nodo.getNodeType()==Node.ELEMENT_NODE){
-               Element element =(Element)nodo;
-               Id =Integer.valueOf(element.getAttribute("id"));
-               NOMBRE= element.getElementsByTagName("nombre").item(0).getTextContent();
-               USERNAME= element.getElementsByTagName("username").item(0).getTextContent();
-               PASWORD= element.getElementsByTagName("password").item(0).getTextContent();
-               
-                boolean insertado = this.controlador.insertarPersona(Id,NOMBRE,USERNAME,PASWORD);
-            if (insertado == true) {
-                JOptionPane.showMessageDialog(rootPane, "Datos guardados");
-                tabla.setModel(this.controlador.personas());
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Algo falló al insertar");
+    private void insertarPersona() {
+
+        try {
+            File archivo = new File("C:\\Users\\JIMENEZ\\Pictures\\Proyecto xml leer\\datos.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document d = db.parse(archivo);
+            d.getDocumentElement().normalize();
+            System.out.println("Elemeto principal" + d.getDocumentElement().getNodeName());
+
+            NodeList listDocentes = d.getElementsByTagName("docente");
+
+            for (int i = 0; i < listDocentes.getLength(); i++) {
+                Node nodo = listDocentes.item(i);
+                System.out.println("Docente:" + nodo.getNodeName() + i);
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                    Id = Integer.valueOf(element.getAttribute("id"));
+                    NOMBRE = element.getElementsByTagName("nombre").item(0).getTextContent();
+                    USERNAME = element.getElementsByTagName("username").item(0).getTextContent();
+                    PASWORD = element.getElementsByTagName("password").item(0).getTextContent();
+                    
+                    boolean insertado = this.controlador.insertarPersona(Id, NOMBRE, USERNAME, PASWORD);
+                    if (insertado == true) {
+                        JOptionPane.showMessageDialog(rootPane, "Datos guardados");
+                        tabla.setModel(this.controlador.personas());
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Algo falló al insertar");
+                    }
+                                   
+                  }
+                
             }
-
-           }   
-       }
-       }catch(NumberFormatException | HeadlessException e){
-               JOptionPane.showMessageDialog(rootPane, "El ID introducido no es un número");
-               e.printStackTrace();
-       }
-         
-//        try {
-//            boolean insertado = this.controlador.insertarPersona(NOMBRE,USERNAME,PASWORD,ID);
-//            if (insertado == true) {
-//                JOptionPane.showMessageDialog(rootPane, "Datos guardados");
-//                tabla.setModel(this.controlador.personas());
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "Algo falló al insertar");
-//            }
-//        } catch (NumberFormatException | HeadlessException e) {
-//            JOptionPane.showMessageDialog(rootPane, "El ID introducido no es un número");
-//        }
+        } catch (NumberFormatException | HeadlessException e) {
+        }
     }
-//    public void seleccionarPersona() {
-//        tabla.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent Mouse_evt) {
-//                if (Mouse_evt.getClickCount() == 1) {
-//                    txtID.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
-//                    txtNombres.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
-//                    txtApellidos.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
-//                }
-//            }
-//        });
-//    }
 
-//    private void actualizarPersona() {
-//        int id = Integer.valueOf(txtID.getText());
-//        String nombre = txtNombres.getText();
-//        String apellidos = txtApellidos.getText();
-//        boolean insertado = this.controlador.actualizarPersona(id, nombre, apellidos);
-//        if (insertado == true) {
-//            JOptionPane.showMessageDialog(rootPane, "Datos actualizados");
-//            this.cancelar();
-//            tabla.setModel(this.controlador.personas());
-//        } else {
-//            JOptionPane.showMessageDialog(rootPane, "Algo falló al actualizar");
-//        }
-//    }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
