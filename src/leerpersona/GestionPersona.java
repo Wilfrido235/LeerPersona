@@ -6,14 +6,16 @@
 package leerpersona;
 
 import java.awt.HeadlessException;
-import java.io.File;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
+import java.io.File;
+import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -30,7 +32,9 @@ public class GestionPersona extends javax.swing.JFrame {
         tabla.setModel(this.controlador.personas());
 //        seleccionarPersona();
     }
-
+     private static String NOMBRE, USERNAME, PASWORD;
+     private static int Id;
+    
     private void LeerPersona() {
         try {
              File archivo=new File("C:\\Users\\JIMENEZ\\Pictures\\Proyecto xml leer\\datos.xml");
@@ -47,10 +51,10 @@ public class GestionPersona extends javax.swing.JFrame {
            System.out.println("Docente:"+nodo.getNodeName()+i);
            if(nodo.getNodeType()==Node.ELEMENT_NODE){
                Element element =(Element)nodo;
-               element.getAttribute("id");
-               element.getElementsByTagName("nombre").item(0).getTextContent();
-               element.getElementsByTagName("username").item(0).getTextContent();
-               element.getElementsByTagName("password").item(0).getTextContent();
+               Id =Integer.valueOf(element.getAttribute("id"));
+               NOMBRE= element.getElementsByTagName("nombre").item(0).getTextContent();
+               USERNAME= element.getElementsByTagName("username").item(0).getTextContent();
+               PASWORD= element.getElementsByTagName("password").item(0).getTextContent();
                
                 boolean insertado = this.controlador.insertarPersona(Id,NOMBRE,USERNAME,PASWORD);
             if (insertado == true) {
@@ -65,8 +69,7 @@ public class GestionPersona extends javax.swing.JFrame {
        }catch(NumberFormatException | HeadlessException e){
                JOptionPane.showMessageDialog(rootPane, "El ID introducido no es un número");
                e.printStackTrace();
-               
-               }
+       }
     }
      private void insertarPersona() {
 //        try {

@@ -12,24 +12,24 @@ public class Controlador extends Conexion {
 
     }
 
-    public boolean insertarPersona(String NOMBRE, String USERNAME, String PASWORD, int Id) {
+     boolean insertarPersona(int Id,String NOMBRE, String USERNAME, String PASWORD) {
         Persona persona = new Persona(Id,NOMBRE,USERNAME,PASWORD);
         return this.Insertar(persona);
     }
 
-    public boolean actualizarPersona(String NOMBRE, String USERNAME, String PASWORD, int Id) {
+    public boolean actualizarPersona(int Id,String NOMBRE, String USERNAME, String PASWORD) {
         Persona personaNueva = new Persona(Id,NOMBRE,USERNAME,PASWORD);        
         return this.Actualizar(personaNueva);
     }
 
     public DefaultTableModel personas() {
-        String titulos[] = {"ID", "NOMBRE", "USERNAME","ID"};
-        DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+        String titulos[] = {"Id", "NOMBRE", "USERNAME","PASWORD"};
+        DefaultTableModel dtm = new DefaultTableModel(null,titulos);
         Persona persona = null;
         Persona[] p = this.Consultar(persona);
         if (p != null) {
             for (Persona per : p) {
-                Object[] cli = new Object[3];
+                Object[] cli = new Object[4];
                 cli[0] = per.getId();
                 cli[1] = per.getNOMBRE();
                 cli[2] = per.getUSERNAME();
@@ -38,14 +38,5 @@ public class Controlador extends Conexion {
             }
         }
         return dtm;
-    }
-
-    public boolean eliminarPersona(int id) {
-        if (id > 0) {
-            Persona persona = new Persona(null, null, null, id);
-            return this.Eliminar(persona);
-        } else {
-            return false;
-        }
     }
 }

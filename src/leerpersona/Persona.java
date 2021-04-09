@@ -4,8 +4,9 @@ public class Persona {
 
     private String NOMBRE, USERNAME, PASWORD;
     private int Id;
+    
 
-    public Persona(String NOMBRE, String USERNAME, String PASWORD, int Id) {
+    public Persona(String NOMBRE, String USERNAME, String PASWORD,int Id) {
         this.NOMBRE = NOMBRE;
         this.USERNAME = USERNAME;
         this.PASWORD = PASWORD;
@@ -15,6 +16,7 @@ public class Persona {
     Persona(int Id, String NOMBRE, String USERNAME, String PASWORD) {
         
     }
+
 
     public String getNOMBRE() {
         return NOMBRE;
@@ -51,7 +53,5 @@ public class Persona {
     @Override
     public String toString() {
         return "Persona{" + "NOMBRE=" + NOMBRE + ", USERNAME=" + USERNAME + ", PASWORD=" + PASWORD + ", Id=" + Id + '}';
-    }
-
-   
+    } 
 }
